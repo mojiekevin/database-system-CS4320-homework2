@@ -1,0 +1,25 @@
+Students:
+
+Wen Fan (wf85)
+Siyu Zhu (sz432)
+Zhidong Liu (zl479)
+
+
+
+Logic:
+
+For search: 
+Use DFS to find the key and return the value. If not, return null.
+
+For insert: 
+Use bottom-up DFS to insert the key-value pair. The upper level will get the returned value of the bottom layer. If the returned value is -1. It means no split happens at the bottom level and we need to do nothing more. If the returned values is not -1, it means split has happened at the bottom level and we need to delete some key and detect whether we need to split again. In this way, we trace from bottom to upper layer to finish the process of inserting key-value pair.
+
+For delete:
+The same idea with insertion. We use bottom-up DFS to delete the key with its value. After deleting the key, we might have 3 different situations:
+The node is not underflowed, we need to do nothong.
+The node is underflowed, and the adjacent node has more than D nodes. Then we should choose to redistribute our bplus tree.
+The node is underflowed, and the adjacent node has only D nodes. Then we should choose to merge these two nodes.
+The upper level will receive the returned value to detect whether merge has happened on the bottom level. If it happens, then this parent node needs to delete some key and detect whether itself is underflowed, too.
+In this way, we trace from bottom to upper layer to finish the process of deleting key-value pair.
+
+The implementation for BPlus Tree is complex. We need to consider lots of different situations and try to deal with them. For example, we need to use different code to delete one key if it is on the left side or not. Therefore, the code might not be as simple as we imagine. We try our best to simplify the code and write exact comments for our code. Hope you can understand it and enjoy it.
